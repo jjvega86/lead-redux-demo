@@ -1,6 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { selectCharacterName } from "../features/character/characterSlice";
 
-const NavBar = ({ characterName }) => {
+const NavBar = () => {
+  const characterName = useSelector(selectCharacterName);
   return <h1 className="navbar">Hello, {characterName}</h1>;
 };
 

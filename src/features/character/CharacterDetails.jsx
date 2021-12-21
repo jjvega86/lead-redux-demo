@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import {
   useGetSingleCharacterQuery,
   useGetCharactersQuery,
@@ -12,8 +11,14 @@ const CharacterDetails = () => {
     useGetSingleCharacterQuery(characterSelection);
   const { data: characters = [] } = useGetCharactersQuery();
 
+  // useState, useEffect, and axios/fetch to make API call and handle loading states
+
   const characterOptions = characters.map((character, index) => {
-    return <option value={index + 1}>{character.name}</option>;
+    return (
+      <option key={character.name} value={index + 1}>
+        {character.name}
+      </option>
+    );
   });
 
   return (

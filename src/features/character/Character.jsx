@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addDisLike, addLike } from "./characterSlice";
 
 const Character = () => {
   const character = useSelector((state) => state.character);
   const dispatch = useDispatch();
+
+  // use data from props as BEFORE to fill in characterName
+  // Then define state and onClick handlers to add likes that are only available on this component
 
   return (
     <article>

@@ -19,6 +19,8 @@ const CharacterList = () => {
   const { data: characters = [], isSuccess } = useGetCharactersQuery();
   const dispatch = useDispatch();
 
+  // useState, useEffect, and axios/fetch to make API call and handle loading states
+
   let content;
 
   if (!isSuccess) {
