@@ -10,7 +10,10 @@ export const swapiApi = createApi({
       query: () => "people/",
       transformResponse: (response, meta, args) => response.results,
     }),
+    getSingleCharacter: builder.query({
+      query: (characterId) => `people/${characterId}`,
+    }),
   }),
 });
 
-export const { useGetCharactersQuery } = swapiApi;
+export const { useGetCharactersQuery, useGetSingleCharacterQuery } = swapiApi;

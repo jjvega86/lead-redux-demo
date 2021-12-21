@@ -4,14 +4,6 @@ body {
   color: #ffe81f;
 }
 
-.navbar {
-  height: auto;
-  width: auto;
-  background-color: black;
-  color: #ffe81f;
-  padding: 5%;
-}
-
 button {
   display: inline-block;
   padding: 0.35em 1.2em;
@@ -31,4 +23,12 @@ button:hover {
   color: black;
   background-color: #ffe81f;
   border: 0.1em solid black;
+}
+
+.navbar {
+  height: 5%;
+  width: auto;
+  background-color: black;
+  color: #ffe81f;
+  padding: 5%;
 }
