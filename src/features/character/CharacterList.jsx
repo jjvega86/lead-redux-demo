@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
-//import { useGetCharactersQuery } from "../api/apiSlice";
-import axios from "axios";
+import React from "react";
+import { useGetCharactersQuery } from "../api/apiSlice";
+import { useDispatch } from "react-redux";
+import { changeCharacter } from "./characterSlice";
 
 const styles = {
   listGroupMine: {
@@ -15,27 +16,8 @@ const styles = {
 };
 
 const CharacterList = () => {
-  const [characters, setCharacters] = useState([]);
-  const [isSuccess, setIsSuccess] = useState(false);
-  /* const {
-    data: characters = [],
-    isFetching,
-    isSuccess,
-  } = useGetCharactersQuery(); */
-
-  useEffect(() => {
-    fetchCharacters();
-  }, []);
-
-  const fetchCharacters = async () => {
-    try {
-      let response = await axios.get("https://swapi.dev/api/people");
-      setCharacters(response.data.results);
-      setIsSuccess(true);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { data: characters = [], isSuccess } = useGetCharactersQuery();
+  const dispatch = useDispatch();
 
   let content;
 
@@ -48,6 +30,7 @@ const CharacterList = () => {
           className="list-group-item"
           key={character.name}
           style={styles.listItemMine}
+          onClick={() => dispatch(changeCharacter(character.name))}
         >
           {character.name}
         </li>
@@ -55,9 +38,16 @@ const CharacterList = () => {
     });
   }
   return (
-    <ul className="list-group" styles={styles.listGroupMine}>
-      {content}
-    </ul>
+    <>
+      <label htmlFor="character-list">Click a Character to Select!</label>
+      <ul
+        className="list-group"
+        id="character-list"
+        styles={styles.listGroupMine}
+      >
+        {content}
+      </ul>
+    </>
   );
 };
 

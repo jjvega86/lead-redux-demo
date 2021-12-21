@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./App.css";
 
-//import { useSelector } from "react-redux";
-//import { selectCharacterName } from "./features/character/characterSlice";
+import { useSelector } from "react-redux";
+import { selectCharacterName } from "./features/character/characterSlice";
 
 import Character from "./features/character/Character.jsx";
 import CharacterForm from "./features/character/CharacterForm";
@@ -18,13 +18,10 @@ import NavBar from "./components/Navbar";
     SHOW REDUX DEV TOOLS
  */
 
-const App = () => {
-  //const characterName = useSelector(selectCharacterName);
-  const [characterName, setCharacterName] = useState("Luke Skywalker");
+//TODO: Generate a list of character options from fetched characters in CharactersDetails
 
-  const changeName = (newName) => {
-    setCharacterName(newName);
-  };
+const App = () => {
+  const characterName = useSelector(selectCharacterName);
 
   return (
     <>
@@ -33,9 +30,9 @@ const App = () => {
         <div className="row">
           <div className="col-md-3"></div>
           <div className="col-md-6">
-            <Character characterName={characterName} />
+            <Character />
             <div className="mt-5">
-              <CharacterForm changeName={changeName} />
+              <CharacterForm />
             </div>
           </div>
           <div className="col-md-3">

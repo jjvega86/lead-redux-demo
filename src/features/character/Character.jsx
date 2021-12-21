@@ -1,28 +1,24 @@
 import React, { useState } from "react";
-//import { useDispatch, useSelector } from "react-redux";
-//import { addDisLike, addLike } from "./characterSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addDisLike, addLike } from "./characterSlice";
 
-const Character = ({ characterName }) => {
-  //const character = useSelector((state) => state.character);
-  //const dispatch = useDispatch();
-  const [likes, setLikes] = useState(0);
-  const [dislikes, setDislikes] = useState(0);
+const Character = () => {
+  const character = useSelector((state) => state.character);
+  const dispatch = useDispatch();
 
   return (
     <article>
-      <h1>{characterName}</h1>
+      <h1>{character.name}</h1>
       <p>
-        <strong>Like Count: {likes}</strong>&nbsp; &nbsp;
+        <strong>Like Count: {character.likes}</strong>&nbsp; &nbsp;
         <span>
-          <button onClick={() => setLikes((prev) => prev + 1)}>Like</button>
+          <button onClick={() => dispatch(addLike())}>Like</button>
         </span>
       </p>
       <p>
-        <strong>Dislike Count: {dislikes}</strong> &nbsp; &nbsp;
+        <strong>Dislike Count: {character.dislikes}</strong> &nbsp; &nbsp;
         <span>
-          <button onClick={() => setDislikes((prev) => prev + 1)}>
-            Dislike
-          </button>
+          <button onClick={() => dispatch(addDisLike())}>Dislike</button>
         </span>
       </p>
     </article>

@@ -1,28 +1,21 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-//import { useGetSingleCharacterQuery } from "../api/apiSlice";
+import {
+  useGetSingleCharacterQuery,
+  useGetCharactersQuery,
+} from "../api/apiSlice";
 
+//! When demoing, make sure to pull network tab and show how going back to previous characters before cache is dumped will not trigger a re-fetch
 const CharacterDetails = () => {
-  const [character, setCharacter] = useState({});
   const [characterSelection, setCharacterSelection] = useState("1");
-  /* const { data: singleCharacter = {} } =
-    useGetSingleCharacterQuery(characterSelection); */
+  const { data: character = {} } =
+    useGetSingleCharacterQuery(characterSelection);
+  const { data: characters = [] } = useGetCharactersQuery();
 
-  useEffect(() => {
-    fetchCharacter(characterSelection);
-  }, [characterSelection]);
+  const characterOptions = characters.map((character, index) => {
+    return <option value={index + 1}>{character.name}</option>;
+  });
 
-  const fetchCharacter = async (characterId) => {
-    try {
-      let response = await axios.get(
-        `https://swapi.dev/api/people/${characterId}/`
-      );
-      console.log(response);
-      setCharacter(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   return (
     <div>
       <label htmlFor="characterSelect">Pick a Character!:</label> <br />
@@ -33,16 +26,7 @@ const CharacterDetails = () => {
         onChange={(e) => setCharacterSelection(e.target.value)}
         style={{ color: "yellow", backgroundColor: "black" }}
       >
-        <option value="1">Luke Skywalker</option>
-        <option value="2">C-3P0</option>
-        <option value="3">R2-D2</option>
-        <option value="4">Darth Vader</option>
-        <option value="5">Leia Organa</option>
-        <option value="6">Owen Lars</option>
-        <option value="7">Beru Whitesun Lars</option>
-        <option value="8">R5-D4</option>
-        <option value="9">Biggs Darklighter</option>
-        <option value="10">Obi-Wan Kenobi</option>
+        {characterOptions}
       </select>
       <h3 className="mt-4">{character.name}</h3>
       <p>Birth Year: {character.birth_year}</p>
